@@ -17,6 +17,11 @@ One of the key learning points in this project was the importance of **Feature E
 - **Status**: Underperformed ($R^2$: -0.09).
 - **Observation**: The model failed significantly because it was skewed by extreme **outliers** (luxury properties over £30M) and a non-normal price distribution.
 
+<p align="center">
+  <img src="./results_v1_baseline.png" width="80%" alt="Baseline Results">
+  <br>
+  <em>Figure 1: Initial model skewed by extreme outliers.</em>
+</p>
 
 ### Version 2: Optimized Model (Current)
 - **Improvements**:
@@ -24,6 +29,11 @@ One of the key learning points in this project was the importance of **Feature E
   - **Target Transformation**: Applied **Log-transformation** (`np.log1p`) to the price variable to normalize the distribution.
 - **Result**: Successfully achieved a positive correlation with **$R^2$: 0.385** and a lower MAE.
 
+<p align="center">
+  <img src="./results_v2_optimized.png" width="80%" alt="Optimized Results">
+  <br>
+  <em>Figure 2: Optimized model showing better alignment after log-transformation.</em>
+</p>
 
 ---
 
@@ -33,19 +43,14 @@ The project visualizes the price disparity across Birmingham districts using 202
 - **Premium Areas**: **Edgbaston (B15)** and **Harborne (B17)** remain the most expensive residential areas.
 - **Student Hubs**: **Selly Oak (B29)** shows moderate price levels, reflecting its high density of student accommodation.
 
-
+<p align="center">
+  <img src="./birmingham_final_market_map.png" width="90%" alt="Birmingham Market Ranking">
+</p>
 
 ---
 
 ## 🛠️ Tech Stack & Skills
 - **Languages**: Python (Pandas, Scikit-learn, Seaborn, Matplotlib).
 - **Core Concepts**: Regression, Outlier Analysis, Feature Engineering (One-Hot Encoding, Log-transform).
-- **Engineering Tools**: 
-  - **PyCharm**: Used for local development and environment management.
-  - **Git/GitHub**: Managed version control and resolved **100MB+ file size limitations** by implementing `.gitignore` and history resets.
 
 ---
-
-## 🎤 Interview "Cheat Sheet"
-When asked about technical challenges, I use this project as a case study:
-> "In this project, I processed over 100k real-world records. The most interesting challenge was when my initial model failed due to extreme outliers in the Birmingham market. By applying **Log-transformation** and **Outlier Filtering**, I improved the $R^2$ from -0.09 to 0.38. This taught me that understanding data distribution is as critical as the algorithm itself."
