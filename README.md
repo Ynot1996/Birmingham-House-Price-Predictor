@@ -18,7 +18,7 @@ One of the key learning points in this project was the importance of **Feature E
 - **Observation**: The model failed significantly because it was skewed by extreme **outliers** (luxury properties over £30M) and a non-normal price distribution.
 
 <p align="center">
-  <img src="./results_v1_baseline.png" width="80%" alt="Baseline Results">
+  <img src="./results_v1_raw_data.png" width="80%" alt="Baseline Results">
   <br>
   <em>Figure 1: Initial model skewed by extreme outliers.</em>
 </p>
