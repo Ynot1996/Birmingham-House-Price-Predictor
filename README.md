@@ -28,7 +28,7 @@ The core value of this project is the documented transition from a failed baseli
 * **Diagnosis**: The model was "memorizing" seasonal noise or specific transaction timing instead of learning real economic value.
 * **Feature Importance (Bias):**
 <p align="center">
-  <img src="./feature_importance_v2.png" width="80%" alt="V2 Feature Importance Bias">
+  <img src="./results_v2_optimized.png" width="80%" alt="V2 Feature Importance Bias">
 </p>
 
 ### 3. Version 3.1: Optimized Logic (Final Success)
@@ -40,12 +40,12 @@ The core value of this project is the documented transition from a failed baseli
 
 **V3.1 Feature Importance (Validated Logic):**
 <p align="center">
-  <img src="./feature_importance_v3_1.png" width="90%" alt="V3.1 Feature Importance Success">
+  <img src="./results_v3_1.png" width="90%" alt="V3.1 Feature Importance Success">
 </p>
 
 **V3.1 Prediction Accuracy:**
 <p align="center">
-  <img src="./results_v3_1.png" width="80%" alt="V3.1 Prediction Scatter Plot">
+  <img src="./feature_engineering_v2_1.py" width="80%" alt="V3.1 Prediction Scatter Plot">
 </p>
 
 ---
