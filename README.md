@@ -45,7 +45,7 @@ The core value of this project is the documented transition from a failed baseli
 
 **V3.1 Prediction Accuracy:**
 <p align="center">
-  <img src="./feature_engineering_v2_1.py" width="80%" alt="V3.1 Prediction Scatter Plot">
+  <img src="./feature_importance_v3_1.png" width="80%" alt="V3.1 Prediction Scatter Plot">
 </p>
 
 ---
