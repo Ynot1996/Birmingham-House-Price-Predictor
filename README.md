@@ -5,58 +5,60 @@ This project is a comprehensive Machine Learning pipeline designed to predict pr
 ## ⚖️ Data Attribution & License
 **Contains HM Land Registry data © Crown copyright and database right 2021. This data is licensed under the Open Government Licence v3.0.**
 
-* **Permitted Use**: This data is used for non-commercial purposes to display residential property price information.
+* **Permitted Use**: This data is used for non-commercial purposes to provide residential property price information services.
 * **Address Data**: Contains address data processed against Ordnance Survey’s AddressBase Premium and Royal Mail’s PAF® database.
 * **Compliance**: Use of this data adheres to the terms of the Open Government Licence (OGL) v3.0.
 
 ---
 
-## 🌟 Project Highlights
-- **Real-World Scale**: Processed over 100,000 records from the UK Price Paid Dataset.
-- **Target Encoding**: Developed a custom `Area_Type_Avg` feature to capture the critical interaction between location and property type.
-- **Explainable AI**: Utilized Feature Importance analysis to identify and resolve model bias.
-
----
-
-## 📈 Model Evolution: The Journey to $R^2 = 0.46$
+## 📈 Model Evolution: From Noise to Signal
 
 The core value of this project is the documented transition from a failed baseline to a logical, signal-driven model.
 
 ### 1. Version 1: The Raw Baseline (Failed)
 * **Status**: Significant Underperformance ($R^2 < 0$).
-* **Diagnosis**: The model failed because it was overwhelmed by **extreme outliers** (luxury properties over £30M) and a heavily skewed price distribution.
-* **Lesson Learned**: Real-world data requires aggressive cleaning and distribution normalization before modeling.
+* **Diagnosis**: The model was overwhelmed by **extreme outliers** (luxury properties over £30M) and a heavily skewed price distribution.
+* **Result**: 
+<p align="center">
+  <img src="./results_v1_raw_data.png" width="80%" alt="V1 Baseline Results">
+</p>
 
 ### 2. Version 2: The Overfitting Trap
-* **Observation**: After filtering properties $\le$ £1M and applying log-transformation, the $R^2$ improved to 0.38, but **`Month`** unexpectedly became the top predictor.
-* **Diagnosis**: The model was "memorizing" seasonal noise from 2024 instead of learning underlying property value.
-* **Action**: Identified a logical flaw where the model relied on transaction timing rather than economic substance.
-
-### 3. Version 3.1: Optimized Logic (Final Mainstream)
-* **Improvements**:
-    * **Composite Target Encoding**: Introduced `Area_Type_Avg` (Postcode + Property Type) to act as a stronger proxy for house size.
-    * **Noise Reduction**: Completely removed the `Month` variable to force the model to prioritize stable geographic features.
-    * **Complexity Control**: Restricted `max_depth` to 10 to ensure the model generalizes well on unseen 2025 data.
-* **Result**: Successfully boosted **$R^2$ to 0.4624**, aligning the model with real-world housing market logic.
-
+* **Observation**: After filtering properties $\le$ £1M and applying log-transformation, the $R^2$ improved to 0.38, but **`Month`** unexpectedly became the top predictor (Importance > 0.20).
+* **Diagnosis**: The model was "memorizing" seasonal noise or specific transaction timing instead of learning real economic value.
+* **Feature Importance (Bias):**
 <p align="center">
-  <img src="./feature_importance_v3_1.png" width="80%" alt="V3.1 Feature Importance">
-  <br>
-  <em>Figure: V3.1 Importance ranking showing the dominance of the Area-Type composite signal.</em>
+  <img src="./feature_importance_v2.png" width="80%" alt="V2 Feature Importance Bias">
+</p>
+
+### 3. Version 3.1: Optimized Logic (Final Success)
+* **Improvements**: 
+    * **Composite Target Encoding**: Created `Area_Type_Avg` (Postcode + Property Type) to act as a powerful proxy for house size and location value.
+    * **Noise Reduction**: Completely removed the `Month` variable to eliminate temporal bias.
+    * **Complexity Control**: Restricted `max_depth` to 10 to ensure the model generalizes well on unseen 2025 data.
+* **Result**: Successfully boosted **$R^2$ to 0.4624**. The feature importance now correctly aligns with economic reality, with our engineered feature dominating the prediction.
+
+**V3.1 Feature Importance (Validated Logic):**
+<p align="center">
+  <img src="./feature_importance_v3_1.png" width="90%" alt="V3.1 Feature Importance Success">
+</p>
+
+**V3.1 Prediction Accuracy:**
+<p align="center">
+  <img src="./results_v3_1.png" width="80%" alt="V3.1 Prediction Scatter Plot">
 </p>
 
 ---
 
-## 🛠️ Technical Implementation
-* **Data Cleaning**: Focused on the mainstream market by filtering properties $\le$ £1,000,000.
-* **Mathematical Scaling**: Applied **Log-transformation** (`np.log1p`) to the price variable to normalize skewed distributions.
-* **Robustness**: Used `.copy()` during data filtering to ensure data integrity and avoid `SettingWithCopy` warnings in Pandas.
-* **Tech Stack**: Python (Pandas, Scikit-learn, Seaborn, Matplotlib).
+## 🛠️ Technical Implementation & Structure
+* **Data Cleaning**: Focused on the mainstream market ($\le$ £1,000,000).
+* **Target Scaling**: Applied **Log-transformation** (`np.log1p`) to normalize price distributions.
+* **Robustness**: Used `.copy()` during data filtering to ensure data integrity and avoid `SettingWithCopy` warnings.
 
 ---
 
 ## 🚀 Future Work
-* **EPC Data Integration**: The current bottleneck is the lack of physical dimensions. The next planned step is to merge **Energy Performance Certificate (EPC)** data to include **Total Floor Area**.
-* **Hyperparameter Tuning**: Implementing `GridSearchCV` to further refine parameters once physical features are added.
+* **EPC Data Integration**: Currently, the model is limited by the lack of physical dimensions. The next step is to merge **Energy Performance Certificate (EPC)** data to include **Total Floor Area** as a primary feature.
+* **Hyperparameter Tuning**: Implementing automated search (e.g., GridSearchCV) once physical features are integrated.
 
 ---
